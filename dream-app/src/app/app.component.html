@@ -1,0 +1,26 @@
+<h1>Vaccination Management System</h1>
+
+<!-- Add Person Form -->
+<h2>Add Person</h2>
+<form (ngSubmit)="addPerson()">
+  <input [(ngModel)]="newPerson.meno" name="meno" placeholder="First Name" required />
+  <input [(ngModel)]="newPerson.priezvisko" name="priezvisko" placeholder="Last Name" required />
+   <select [(ngModel)]="newPerson.rokNarodenia" name="rokNarodenia" required>
+    <option value="" disabled selected>Select Year of Birth</option>
+    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+  </select>
+  <select [(ngModel)]="newPerson.pohlavie" name="pohlavie" required>
+    <option value="" disabled selected>Select Gender</option>
+    <option value="MUZ">Muž</option>
+    <option value="ZENA">Žena</option>
+  </select>  
+  <button type="submit">Add Person</button>
+</form>
+
+<!-- Add Vaccine Form -->
+<h2>Add Vaccine</h2>
+<form (ngSubmit)="addVaccine()">
+  <input [(ngModel)]="newVaccine.nazov" name="nazov" placeholder="Vaccine Name" required />
+  <input [(ngModel)]="newVaccine.typ" name="typ" placeholder="Vaccine Type" required />
+  <button type="submit">Add Vaccine</button>
+</form>
