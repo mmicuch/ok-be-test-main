@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-add-vaccine',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgIf],
+  imports: [ReactiveFormsModule, NgFor, NgIf, NgClass],
   template: `
     <div class="add-vaccine-container">
       <h1>Pridať novú vakcínu</h1>
@@ -19,9 +20,9 @@ import { NgFor, NgIf } from '@angular/common';
               type="text"
               id="nazov"
               formControlName="nazov"
-              [ngClass]="{'invalid': submitted && f.nazov.errors}"
+              [ngClass]="{'invalid': submitted && f['nazov'].errors}"
             >
-            <div *ngIf="submitted && f.nazov.errors" class="error-message">
+            <div *ngIf="submitted && f['nazov'].errors" class="error-message">
               Názov vakcíny je povinný
             </div>
           </div>
@@ -32,9 +33,9 @@ import { NgFor, NgIf } from '@angular/common';
               type="text"
               id="vyrobca"
               formControlName="vyrobca"
-              [ngClass]="{'invalid': submitted && f.vyrobca.errors}"
+              [ngClass]="{'invalid': submitted && f['vyrobca'].errors}"
             >
-            <div *ngIf="submitted && f.vyrobca.errors" class="error-message">
+            <div *ngIf="submitted && f['vyrobca'].errors" class="error-message">
               Výrobca je povinný
             </div>
           </div>
@@ -44,12 +45,12 @@ import { NgFor, NgIf } from '@angular/common';
             <select
               id="typ"
               formControlName="typ"
-              [ngClass]="{'invalid': submitted && f.typ.errors}"
+              [ngClass]="{'invalid': submitted && f['typ'].errors}"
             >
               <option value="" disabled selected>Vyberte typ vakcíny</option>
               <option *ngFor="let type of vaccineTypes" [value]="type">{{ type }}</option>
             </select>
-            <div *ngIf="submitted && f.typ.errors" class="error-message">
+            <div *ngIf="submitted && f['typ'].errors" class="error-message">
               Typ vakcíny je povinný
             </div>
           </div>

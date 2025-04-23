@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 interface Osoba {
   id: number;
@@ -18,7 +19,7 @@ interface Vakcina {
 @Component({
   selector: 'app-add-vaccination',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgIf],
+  imports: [ReactiveFormsModule, NgFor, NgIf, NgClass],
   template: `
     <div class="add-vaccination-container">
       <h1>Pridať nové očkovanie</h1>
@@ -30,14 +31,14 @@ interface Vakcina {
             <select
               id="osobaId"
               formControlName="osobaId"
-              [ngClass]="{'invalid': submitted && f.osobaId.errors}"
+              [ngClass]="{'invalid': submitted && f['osobaId'].errors}"
             >
               <option value="" disabled selected>Vyberte osobu</option>
               <option *ngFor="let osoba of osoby" [value]="osoba.id">
                 {{ osoba.meno }} {{ osoba.priezvisko }}
               </option>
             </select>
-            <div *ngIf="submitted && f.osobaId.errors" class="error-message">
+            <div *ngIf="submitted && f['osobaId'].errors" class="error-message">
               Osoba je povinná
             </div>
           </div>
@@ -47,14 +48,14 @@ interface Vakcina {
             <select
               id="vakcinaId"
               formControlName="vakcinaId"
-              [ngClass]="{'invalid': submitted && f.vakcinaId.errors}"
+              [ngClass]="{'invalid': submitted && f['vakcinaId'].errors}"
             >
               <option value="" disabled selected>Vyberte vakcínu</option>
               <option *ngFor="let vakcina of vakciny" [value]="vakcina.id">
                 {{ vakcina.nazov }} ({{ vakcina.typ }})
               </option>
             </select>
-            <div *ngIf="submitted && f.vakcinaId.errors" class="error-message">
+            <div *ngIf="submitted && f['vakcinaId'].errors" class="error-message">
               Vakcína je povinná
             </div>
           </div>
@@ -65,9 +66,9 @@ interface Vakcina {
               type="date"
               id="datumAplikacie"
               formControlName="datumAplikacie"
-              [ngClass]="{'invalid': submitted && f.datumAplikacie.errors}"
+              [ngClass]="{'invalid': submitted && f['datumAplikacie'].errors}"
             >
-            <div *ngIf="submitted && f.datumAplikacie.errors" class="error-message">
+            <div *ngIf="submitted && f['datumAplikacie'].errors" class="error-message">
               Dátum aplikácie je povinný
             </div>
           </div>
@@ -79,9 +80,9 @@ interface Vakcina {
               id="poradieDavky"
               formControlName="poradieDavky"
               min="1"
-              [ngClass]="{'invalid': submitted && f.poradieDavky.errors}"
+              [ngClass]="{'invalid': submitted && f['poradieDavky'].errors}"
             >
-            <div *ngIf="submitted && f.poradieDavky.errors" class="error-message">
+            <div *ngIf="submitted && f['poradieDavky'].errors" class="error-message">
               Poradie dávky je povinné (minimálne 1)
             </div>
           </div>

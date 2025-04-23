@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-add-person',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgIf],
+  imports: [ReactiveFormsModule, NgFor, NgIf, NgClass],
   template: `
     <div class="add-person-container">
       <h1>Pridať novú osobu</h1>
@@ -19,9 +21,9 @@ import { NgFor, NgIf } from '@angular/common';
               type="text"
               id="meno"
               formControlName="meno"
-              [ngClass]="{'invalid': submitted && f.meno.errors}"
+              [ngClass]="{'invalid': submitted && f['meno'].errors}"
             >
-            <div *ngIf="submitted && f.meno.errors" class="error-message">
+            <div *ngIf="submitted && f['meno'].errors" class="error-message">
               Meno je povinné
             </div>
           </div>
@@ -32,9 +34,9 @@ import { NgFor, NgIf } from '@angular/common';
               type="text"
               id="priezvisko"
               formControlName="priezvisko"
-              [ngClass]="{'invalid': submitted && f.priezvisko.errors}"
+              [ngClass]="{'invalid': submitted && f['priezvisko'].errors}"
             >
-            <div *ngIf="submitted && f.priezvisko.errors" class="error-message">
+            <div *ngIf="submitted && f['priezvisko'].errors" class="error-message">
               Priezvisko je povinné
             </div>
           </div>
@@ -44,12 +46,12 @@ import { NgFor, NgIf } from '@angular/common';
             <select
               id="rokNarodenia"
               formControlName="rokNarodenia"
-              [ngClass]="{'invalid': submitted && f.rokNarodenia.errors}"
+              [ngClass]="{'invalid': submitted && f['rokNarodenia'].errors}"
             >
               <option value="" disabled selected>Vyberte rok narodenia</option>
               <option *ngFor="let year of years" [value]="year">{{ year }}</option>
             </select>
-            <div *ngIf="submitted && f.rokNarodenia.errors" class="error-message">
+            <div *ngIf="submitted && f['rokNarodenia'].errors" class="error-message">
               Rok narodenia je povinný
             </div>
           </div>
@@ -59,13 +61,13 @@ import { NgFor, NgIf } from '@angular/common';
             <select
               id="pohlavie"
               formControlName="pohlavie"
-              [ngClass]="{'invalid': submitted && f.pohlavie.errors}"
+              [ngClass]="{'invalid': submitted && f['pohlavie'].errors}"
             >
               <option value="" disabled selected>Vyberte pohlavie</option>
               <option value="MUZ">Muž</option>
               <option value="ZENA">Žena</option>
             </select>
-            <div *ngIf="submitted && f.pohlavie.errors" class="error-message">
+            <div *ngIf="submitted && f['pohlavie'].errors" class="error-message">
               Pohlavie je povinné
             </div>
           </div>
